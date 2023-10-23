@@ -25,12 +25,12 @@ const todoController = require("../controllers/todoController");
  *        type: boolean
  *        description: To-Do status
  *    required:
- *      - title:
+ *      - title
  *    example:
  *      title: To-Do example
  *      description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
  *      category: Important
- * 			completed: false
+ *      completed: false
  */
 
 /**
