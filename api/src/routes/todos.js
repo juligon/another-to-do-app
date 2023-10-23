@@ -29,7 +29,8 @@ const todoController = require("../controllers/todoController");
  *    example:
  *      title: To-Do example
  *      description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
- *      completed: false
+ *      category: Important
+ * 			completed: false
  */
 
 /**

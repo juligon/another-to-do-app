@@ -20,7 +20,7 @@ const swaggerSpec = {
  		},
  		servers: [
  			{
- 				url: "http://localhost:3001/api/todos",
+ 				url: "https://todoappchallenge-production.up.railway.app/api/todos",
  			},
  		],
  	},
