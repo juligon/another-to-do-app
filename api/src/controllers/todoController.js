@@ -1,22 +1,33 @@
 const { Todo } = require("../db");
 const { Op } = require("sequelize");
 
-// Función para obtener todos los To-Dos
+// Función para obtener todos los To-Dos y aplicar filtro por título y categoría
 const getToDos = async (req, res, next) => {
-	try {
-		const todos = await Todo.findAll();
+  const { title, category } = req.query;
+  let whereClause = {};
 
-		if (todos.length === 0) {
-			const error = new Error("To-Dos not found");
-			error.status = 404;
-			throw error;
-		}
+  if (title) {
+    whereClause.title = {
+      [Op.iLike]: `%${title}%`,
+    };
+  }
 
-		res.json(todos);
-	} catch (error) {
-		next(error);
-	}
+  try {
+    const todos = await Todo.findAll({
+      where: whereClause,
+    });
+
+    if (category) {
+      const filteredTodos = todos.filter(todo => todo.category.toLowerCase() === category.toLowerCase());
+      res.json(filteredTodos);
+    } else {
+      res.json(todos);
+    }
+  } catch (error) {
+    next(error);
+  }
 };
+
 
 // Función para buscar un To-Do por su ID
 const getToDoById = async (req, res, next) => {
