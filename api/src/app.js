@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const routes = require("./routes/index.js");
 const path = require("path");
+const morgan = require("morgan");
 
 const server = express();
 server.name = "API";
@@ -30,6 +31,7 @@ const swaggerSpec = {
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
+server.use(morgan("dev"));
 server.use(
   "/api-doc",
   swaggerUI.serve,
