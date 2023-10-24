@@ -64,8 +64,19 @@ router.get("/:id", todoController.getToDoById);
  * @swagger
  * /api/todos:
  *   get:
- *     summary: Get all To-Dos
+ *     summary: Get all To-Dos with optional filters
  *     tags: [To-Do]
+ *      parameters:
+ *       - name: title
+ *         in: query
+ *         description: Filter To-Dos by title (optional)
+ *         schema:
+ *           type: string
+ *       - name: category
+ *         in: query
+ *         description: Filter To-Dos by category (optional)
+ *         schema:
+ *           type: string
  *     responses:
  *       '200':
  *         description: To-Dos obtained successfully
