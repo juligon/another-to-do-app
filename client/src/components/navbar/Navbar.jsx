@@ -63,7 +63,7 @@ export default function NavBar({ onSearch }) {
 						<input
 							className="form-control me-2"
 							type="search"
-							placeholder="Search by title or category"
+							placeholder="Search"
 							aria-label="Search"
 							value={searchQuery}
 							onChange={handleSearchChange}
