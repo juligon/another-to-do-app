@@ -3,31 +3,36 @@ const { Op } = require("sequelize");
 
 // Función para obtener todos los To-Dos y aplicar filtro por título y categoría
 const getToDos = async (req, res, next) => {
-  const { title, category } = req.query;
-  let whereClause = {};
+	const { title, category } = req.query;
+	console.log("Title:", title);
+	console.log("Category:", category);
 
-  if (title) {
-    whereClause.title = {
-      [Op.iLike]: `%${title}%`,
-    };
-  }
+	let whereClause = {};
 
-  try {
-    const todos = await Todo.findAll({
-      where: whereClause,
-    });
+	if (title) {
+		whereClause.title = {
+			[Op.iLike]: `%${title}%`,
+		};
+	}
 
-    if (category) {
-      const filteredTodos = todos.filter(todo => todo.category.toLowerCase() === category.toLowerCase());
-      res.json(filteredTodos);
-    } else {
-      res.json(todos);
-    }
-  } catch (error) {
-    next(error);
-  }
+	try {
+		const todos = await Todo.findAll({
+			where: whereClause,
+		});
+
+		if (category) {
+			const filteredTodos = todos.filter(
+				(todo) => todo.category.toLowerCase() === category.toLowerCase()
+			);
+			res.json(filteredTodos);
+			console.log("Filtered To-Dos:", filteredTodos);
+		} else {
+			res.json(todos);
+		}
+	} catch (error) {
+		next(error);
+	}
 };
-
 
 // Función para buscar un To-Do por su ID
 const getToDoById = async (req, res, next) => {
@@ -58,7 +63,7 @@ const createToDo = async (req, res, next) => {
 			error.status = 400;
 			throw error;
 		}
-		
+
 		const existingToDo = await Todo.findOne({
 			where: { title: { [Op.iLike]: `%${title}%` } },
 		});
@@ -73,7 +78,7 @@ const createToDo = async (req, res, next) => {
 			title: title,
 			description: description,
 			category: category,
-			completed: completed
+			completed: completed,
 		});
 
 		res.status(201).json(newToDo);
@@ -117,7 +122,8 @@ const updateToDo = async (req, res, next) => {
 		const updatedFields = {};
 		if (title !== undefined) updatedFields.title = title;
 		if (description !== undefined) {
-			updatedFields.description = description !== null && description !== "" ? description : null;
+			updatedFields.description =
+				description !== null && description !== "" ? description : null;
 		}
 		if (category !== undefined) updatedFields.category = category;
 		if (completed !== undefined) updatedFields.completed = completed;
@@ -134,14 +140,10 @@ const updateToDo = async (req, res, next) => {
 	}
 };
 
-
 module.exports = {
-  getToDos,
+	getToDos,
 	getToDoById,
-  createToDo,
-  deleteToDo,
-  updateToDo,
+	createToDo,
+	deleteToDo,
+	updateToDo,
 };
-
-
-
