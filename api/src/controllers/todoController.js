@@ -13,7 +13,7 @@ const getToDos = async (req, res, next) => {
 		whereClause[Op.or] = [];
 
 		// Verifica si el valor de búsqueda coincide con una categoría predefinida
-		const predefinedCategories = ["urgent", "important", "later"];
+		const predefinedCategories = ["Urgent", "Important", "Later"];
 		if (predefinedCategories.includes(title)) {
 			whereClause[Op.or].push({
 				category: {
