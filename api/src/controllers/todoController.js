@@ -69,19 +69,14 @@ const createToDo = async (req, res, next) => {
 			throw error;
 		}
 
-		const newToDoData = {
+		const newToDo = await Todo.create({
 			title: title,
+			description: description,
 			category: category,
 			completed: completed
-		};
+		});
 
-		if (description !== undefined && description !== null && description !== "") {
-			newToDoData.description = description;
-		}
-
-		const newToDo = await Todo.create(newToDoData);
-
-		res.status(201).json(newToDo)
+		res.status(201).json(newToDo);
 	} catch (error) {
 		next(error);
 	}
@@ -119,11 +114,12 @@ const updateToDo = async (req, res, next) => {
 			throw error;
 		}
 
-		// Actualiza solo las propiedades que se proporcionan en el cuerpo de la solicitud
 		const updatedFields = {};
-		if (title) updatedFields.title = title;
-		if (description) updatedFields.description = description;
-		if (category) updatedFields.category = category;
+		if (title !== undefined) updatedFields.title = title;
+		if (description !== undefined) {
+			updatedFields.description = description !== null && description !== "" ? description : null;
+		}
+		if (category !== undefined) updatedFields.category = category;
 		if (completed !== undefined) updatedFields.completed = completed;
 
 		await todo.update(updatedFields);
