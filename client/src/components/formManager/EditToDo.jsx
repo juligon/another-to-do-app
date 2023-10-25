@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unknown-property */
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { updateToDo, getToDos } from "../../services/todoController";
+import { BsArrowLeft } from "react-icons/bs";
 
 export default function EditToDo() {
 	const { id } = useParams();
@@ -78,6 +79,19 @@ export default function EditToDo() {
 			className="container-fluid bg-dark text-light"
 			style={{ paddingTop: "5rem" }}
 		>
+			<button
+				className="btn btn-outline-light"
+				type="button"
+				style={{
+					border: "none",
+					backgroundColor: "transparent",
+					padding: "0 0 1.5rem",
+				}}
+			>
+				<Link to="/" style={{ textDecoration: "none", color: "#ffffff" }}>
+					<BsArrowLeft />
+				</Link>
+			</button>
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">

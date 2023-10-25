@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { useState, useEffect } from "react";
@@ -8,11 +9,13 @@ import {
 } from "../../services/todoController";
 import { Link } from "react-router-dom";
 import "./ToDoList.css";
+import { BsPencil, BsTrash3, BsCheckCircle } from "react-icons/bs";
 
-export default function ToDoList() {
+export default function ToDoList({ todos: initialTodos }) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState(initialTodos);
+
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -51,6 +54,11 @@ export default function ToDoList() {
 		}
 	};
 
+	useEffect(() => {
+		setTodos(initialTodos);
+	}, [initialTodos]);
+	
+
 	return (
 		<>
 			<div
@@ -75,35 +83,41 @@ export default function ToDoList() {
 							>
 								<div className="card-header border-bottom border-secondary">
 									{e.category}
+									<span
+										className={`status ${
+											e.completed ? "completed" : "pending"
+										} text-success float-end`}
+									>
+										{e.completed ? <BsCheckCircle /> : ""}
+									</span>
 								</div>
 								<div className="card-body">
 									<h5 className="card-title">{e.title}</h5>
 									<p className="card-text">{e.description}</p>
-									<p
-										className={`status ${
-											e.completed ? "completed" : "pending"
-										} small text-secondary`}
-									>
-										{e.completed ? "Completed" : ""}
-									</p>
+
 									<div className="d-grid gap-2 d-md-flex justify-content-md-end">
-										<Link
-											className="btn btn-outline-primary me-md-2"
-											type="button"
-											to={`/todos/${e.id}`}
-											style={{
-												textDecoration: "none",
-											}}
+										<button type="button" className="btn btn-outline-primary"
+											style={{ border: "none", backgroundColor: "transparent" }}
 										>
-											Edit
-										</Link>
+											<Link
+												to={`/todos/${e.id}`}
+												style={{
+													textDecoration: "none",
+												}}
+											>
+												<BsPencil />
+											</Link>
+										</button>
 
 										<button
-											className="btn btn-outline-danger"
-											type="button"
+											type="button" className="btn btn-outline-danger"
 											onClick={() => handleDelete(e.id)}
+											style={{
+												border: "none",
+												backgroundColor: "transparent",
+											}}
 										>
-											Delete
+											<BsTrash3 />
 										</button>
 									</div>
 								</div>

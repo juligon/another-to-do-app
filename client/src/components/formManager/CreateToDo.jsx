@@ -2,7 +2,8 @@
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import { createToDo } from "../../services/todoController";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { BsArrowLeft } from "react-icons/bs";
 
 export default function CreateToDo() {
 	const [todoData, setTodoData] = useState({
@@ -39,6 +40,19 @@ export default function CreateToDo() {
 			className="container-fluid bg-dark text-light"
 			style={{ paddingTop: "5rem" }}
 		>
+			<button
+				className="btn btn-outline-light"
+				type="button"
+				style={{
+					border: "none",
+					backgroundColor: "transparent",
+					padding: "0 0 1.5rem",
+				}}
+			>
+				<Link to="/" style={{ textDecoration: "none", color: "#ffffff" }}>
+					<BsArrowLeft />
+				</Link>
+			</button>
 			<form onSubmit={handleCreateTodo}>
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
