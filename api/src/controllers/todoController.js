@@ -3,9 +3,10 @@ const { Op } = require("sequelize");
 
 // Función para obtener todos los To-Dos y aplicar filtro por título y categoría
 const getToDos = async (req, res, next) => {
-  const { title, category } = req.query;
-  console.log("Title:", title);
-  console.log("Category:", category);
+  
+  const title = req.query.title || '';
+	const category = req.query.category || '';
+
 
   const whereClause = buildWhereClause(title, category);
 
@@ -30,6 +31,7 @@ const buildWhereClause = (title, category) => {
 
   return whereClause;
 };
+
 
 const isPredefinedCategory = (value) => {
   const predefinedCategories = ["urgent", "important", "later"];
