@@ -13,7 +13,7 @@ const getToDos = async (req, res, next) => {
 		whereClause[Op.or] = [];
 
 		// Verifica si el valor de búsqueda coincide con una categoría predefinida
-		const predefinedCategories = ["Urgent", "Important", "Later"];
+		const predefinedCategories = ["urgent", "important", "later"];
 		if (predefinedCategories.includes(title)) {
 			whereClause[Op.or].push({
 				category: {
@@ -57,7 +57,6 @@ const getToDos = async (req, res, next) => {
 		next(error);
 	}
 };
-
 
 // Función para buscar un To-Do por su ID
 const getToDoById = async (req, res, next) => {
