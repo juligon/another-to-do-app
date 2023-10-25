@@ -69,14 +69,19 @@ const createToDo = async (req, res, next) => {
 			throw error;
 		}
 
-		const newToDo = await Todo.create({
+		const newToDoData = {
 			title: title,
-			description: description,
 			category: category,
 			completed: completed
-		});
+		};
 
-		res.status(201).json(newToDo);
+		if (description !== undefined && description !== null && description !== "") {
+			newToDoData.description = description;
+		}
+
+		const newToDo = await Todo.create(newToDoData);
+
+		res.status(201).json(newToDo)
 	} catch (error) {
 		next(error);
 	}
