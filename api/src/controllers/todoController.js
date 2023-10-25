@@ -10,15 +10,15 @@ const getToDos = async (req, res, next) => {
 	let whereClause = {};
 
 	if (title || category) {
-        whereClause[Op.or] = [];
+    whereClause[Op.or] = [];
 
-        // Verifica si el valor de búsqueda coincide con una categoría predefinida
-        const predefinedCategories = ["Urgent", "Important", "Later"];
-        if (predefinedCategories.includes(title)) {
-          whereClause[Op.or].push({
+    // Verifica si el valor de búsqueda coincide con una categoría predefinida
+    const predefinedCategories = ["Urgent", "Important", "Later"];
+    if (predefinedCategories.includes(title)) {
+        whereClause[Op.or].push({
             category: title, 
         });
-        } else {
+    } else {
         if (title) {
             whereClause[Op.or].push({
                 title: {
@@ -28,16 +28,16 @@ const getToDos = async (req, res, next) => {
         }
 
         if (category) {
+            const lowercaseCategory = category.toLowerCase(); 
             whereClause[Op.or].push({
-                [Op.or]: [
-                    { category: category },            
-                    { category: category.toUpperCase() }, 
-                    { category: category.toLowerCase() }, 
-                ]
+                category: {
+                    [Op.iLike]: `%${lowercaseCategory}%`, 
+                },
             });
         }
     }
 }
+
 
 
 	try {
