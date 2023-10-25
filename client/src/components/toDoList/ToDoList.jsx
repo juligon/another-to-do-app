@@ -95,7 +95,7 @@ export default function ToDoList({ todos: initialTodos }) {
 									<h5 className="card-title">{e.title}</h5>
 									<p className="card-text">{e.description}</p>
 
-									<div className="d-grid gap-2 d-md-flex justify-content-md-end">
+									<div className="d-grid gap-2 d-flex justify-content-end">
 										<button type="button" className="btn btn-outline-primary"
 											style={{ border: "none", backgroundColor: "transparent" }}
 										>
