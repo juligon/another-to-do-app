@@ -12,20 +12,30 @@ const getToDos = async (req, res, next) => {
 	if (title || category) {
 		whereClause[Op.or] = [];
 
-		if (title) {
+		// Verificar si el valor de búsqueda coincide con una categoría predefinida
+		const predefinedCategories = ["urgent", "important", "later"];
+		if (predefinedCategories.includes(title)) {
 			whereClause[Op.or].push({
-				title: {
+				category: {
 					[Op.iLike]: `%${title}%`,
 				},
 			});
-		}
+		} else {
+			if (title) {
+				whereClause[Op.or].push({
+					title: {
+						[Op.iLike]: `%${title}%`,
+					},
+				});
+			}
 
-		if (category) {
-			whereClause[Op.or].push({
-				category: {
-					[Op.iLike]: `%${category}%`,
-				},
-			});
+			if (category) {
+				whereClause[Op.or].push({
+					category: {
+						[Op.iLike]: `%${category}%`,
+					},
+				});
+			}
 		}
 	}
 
@@ -47,6 +57,7 @@ const getToDos = async (req, res, next) => {
 		next(error);
 	}
 };
+
 
 // Función para buscar un To-Do por su ID
 const getToDoById = async (req, res, next) => {
