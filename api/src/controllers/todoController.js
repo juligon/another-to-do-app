@@ -9,10 +9,24 @@ const getToDos = async (req, res, next) => {
 
 	let whereClause = {};
 
-	if (title) {
-		whereClause.title = {
-			[Op.iLike]: `%${title}%`,
-		};
+	if (title || category) {
+		whereClause[Op.or] = [];
+
+		if (title) {
+			whereClause[Op.or].push({
+				title: {
+					[Op.iLike]: `%${title}%`,
+				},
+			});
+		}
+
+		if (category) {
+			whereClause[Op.or].push({
+				category: {
+					[Op.iLike]: `%${category}%`,
+				},
+			});
+		}
 	}
 
 	try {
@@ -20,15 +34,15 @@ const getToDos = async (req, res, next) => {
 			where: whereClause,
 		});
 
-		if (category) {
-			const filteredTodos = todos.filter(
-				(todo) => todo.category.toLowerCase() === category.toLowerCase()
+		if (todos.length === 0) {
+			const error = new Error(
+				`To-Dos not found for title: ${title}, category: ${category}`
 			);
-			res.json(filteredTodos);
-			console.log("Filtered To-Dos:", filteredTodos);
-		} else {
-			res.json(todos);
+			error.status = 404;
+			throw error;
 		}
+
+		res.json(todos);
 	} catch (error) {
 		next(error);
 	}

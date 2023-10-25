@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
 				type: DataTypes.TEXT,
 			},
 			category: {
-				type: DataTypes.ENUM("Urgent", "Important", "Later"),
+				type: DataTypes.STRING,
 			},
 			completed: {
 				type: DataTypes.BOOLEAN,
