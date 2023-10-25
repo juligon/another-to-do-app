@@ -10,34 +10,35 @@ const getToDos = async (req, res, next) => {
 	let whereClause = {};
 
 	if (title || category) {
-		whereClause[Op.or] = [];
+        whereClause[Op.or] = [];
 
-		// Verifica si el valor de búsqueda coincide con una categoría predefinida
-		const predefinedCategories = ["Urgent", "Important", "Later"];
-		if (predefinedCategories.includes(title)) {
-			whereClause[Op.or].push({
-				category: {
-					[Op.iLike]: `%${title}%`,
-				},
-			});
-		} else {
-			if (title) {
-				whereClause[Op.or].push({
-					title: {
-						[Op.iLike]: `%${title}%`,
-					},
-				});
-			}
+        // Verifica si el valor de búsqueda coincide con una categoría predefinida
+        const predefinedCategories = ["Urgent", "Important", "Later"];
+        if (predefinedCategories.includes(title)) {
+          whereClause[Op.or].push({
+            category: title, 
+        });
+        } else {
+        if (title) {
+            whereClause[Op.or].push({
+                title: {
+                    [Op.iLike]: `%${title}%`,
+                },
+            });
+        }
 
-			if (category) {
-				whereClause[Op.or].push({
-					category: {
-						[Op.iLike]: `%${category}%`,
-					},
-				});
-			}
-		}
-	}
+        if (category) {
+            whereClause[Op.or].push({
+                [Op.or]: [
+                    { category: category },            
+                    { category: category.toUpperCase() }, 
+                    { category: category.toLowerCase() }, 
+                ]
+            });
+        }
+    }
+}
+
 
 	try {
 		const todos = await Todo.findAll({
