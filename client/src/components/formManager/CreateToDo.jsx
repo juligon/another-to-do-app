@@ -15,14 +15,30 @@ export default function CreateToDo() {
 
 	const navigate = useNavigate();
 
+	function capitalizeFirstLetter(string) {
+		if (!string) {
+			return "";
+		}
+	
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	const handleCreateTodo = async (e) => {
 		e.preventDefault();
 		if (!todoData.title) {
 			return;
 		}
 
+		const capitalizedTodoData = {
+			title: capitalizeFirstLetter(todoData.title),
+			description: capitalizeFirstLetter(todoData.description),
+			category: capitalizeFirstLetter(todoData.category),
+			completed: todoData.completed,
+		};
+
 		try {
-			await createToDo(todoData);
+			await createToDo(capitalizedTodoData);
+
 			setTodoData({
 				title: "",
 				description: "",
@@ -112,15 +128,15 @@ export default function CreateToDo() {
 						className="form-check-input bg-dark"
 						type="checkbox"
 						id="flexCheckDefault"
-						value={todoData.completed} 
+						value={todoData.completed}
 						onChange={(e) =>
 							setTodoData({
 								...todoData,
-								completed: e.target.checked, 
+								completed: e.target.checked,
 							})
 						}
 					/>
-					<label className="form-check-label" for="flexCheckDefault">
+					<label className="form-check-label" htmlFor="flexCheckDefault">
 						Completed
 					</label>
 				</div>

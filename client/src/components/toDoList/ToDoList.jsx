@@ -57,14 +57,6 @@ export default function ToDoList({ todos: initialTodos }) {
 	useEffect(() => {
 		setTodos(initialTodos);
 	}, [initialTodos]);
-	
-	function capitalizeFirstLetter(string) {
-    if (!string) {
-        return ''; 
-		}
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 
 	return (
 		<>
@@ -89,7 +81,7 @@ export default function ToDoList({ todos: initialTodos }) {
 								key={e.id}
 							>
 								<div className="card-header border-bottom border-secondary">
-									{capitalizeFirstLetter(e.category)}
+									{e.category}
 									<span
 										className={`status ${
 											e.completed ? "completed" : "pending"
@@ -99,8 +91,8 @@ export default function ToDoList({ todos: initialTodos }) {
 									</span>
 								</div>
 								<div className="card-body">
-									<h5 className="card-title">{capitalizeFirstLetter(e.title)}</h5>
-									<p className="card-text">{capitalizeFirstLetter(e.description)}</p>
+									<h5 className="card-title">{e.title}</h5>
+									<p className="card-text">{e.description}</p>
 
 									<div className="d-grid gap-2 d-flex justify-content-end">
 										<button type="button" className="btn btn-outline-primary"
