@@ -4,38 +4,25 @@ const { Op } = require("sequelize");
 // Función para obtener todos los To-Dos y aplicar filtro por título y categoría
 const getToDos = async (req, res, next) => {
 	const { title, category } = req.query;
-	console.log("Title:", title);
-	console.log("Category:", category);
-
 	let whereClause = {};
 
 	if (title || category) {
 		whereClause[Op.or] = [];
 
-		// Verifica si el valor de búsqueda coincide con una categoría predefinida
-		const predefinedCategories = ["urgent", "important", "later"];
-		if (predefinedCategories.includes(title)) {
+		if (title) {
 			whereClause[Op.or].push({
-				category: {
+				title: {
 					[Op.iLike]: `%${title}%`,
 				},
 			});
-		} else {
-			if (title) {
-				whereClause[Op.or].push({
-					title: {
-						[Op.iLike]: `%${title}%`,
-					},
-				});
-			}
+		}
 
-			if (category) {
-				whereClause[Op.or].push({
-					category: {
-						[Op.iLike]: `%${category}%`,
-					},
-				});
-			}
+		if (category) {
+			whereClause[Op.or].push({
+				category: {
+					[Op.iLike]: `%${category}%`,
+				},
+			});
 		}
 	}
 

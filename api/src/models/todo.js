@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
 				type: DataTypes.TEXT,
 			},
 			category: {
+				allowNull: false,
 				type: DataTypes.STRING,
 			},
 			completed: {

@@ -42,8 +42,6 @@ modelDefiners.forEach((model) => model(sequelize));
 // En sequelize.models están todos los modelos importados como propiedades
 const { Todo } = sequelize.models;
 
-// Relaciones
-
 
 
 module.exports = {
