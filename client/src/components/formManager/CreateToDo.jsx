@@ -102,9 +102,9 @@ export default function CreateToDo() {
 						required
 					>
 						<option value="">Select an option</option>
-						<option value="Urgent">Urgent</option>
-						<option value="Important">Important</option>
-						<option value="Later">Later</option>
+						<option value="urgent">Urgent</option>
+						<option value="important">Important</option>
+						<option value="later">Later</option>
 					</select>
 				</div>
 				<div className="form-check" style={{ marginBottom: "10px" }}>
