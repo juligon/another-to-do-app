@@ -95,8 +95,8 @@ export default function ToDoList({ todos: initialTodos }) {
 									</span>
 								</div>
 								<div className="card-body">
-									<h5 className="card-title">{capitalizeFirstLetter(e.category)}</h5>
-									<p className="card-text">{capitalizeFirstLetter(e.category)}</p>
+									<h5 className="card-title">{capitalizeFirstLetter(e.title)}</h5>
+									<p className="card-text">{capitalizeFirstLetter(e.description)}</p>
 
 									<div className="d-grid gap-2 d-flex justify-content-end">
 										<button type="button" className="btn btn-outline-primary"
