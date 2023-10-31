@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-	const Todo = sequelize.define(
-		"Todo",
+	const Task = sequelize.define(
+		"Task",
 		{
 			id: {
 				allowNull: false,
@@ -28,5 +28,5 @@ module.exports = (sequelize) => {
 		},
 	);
 
-	return Todo;
+	return Task;
 };

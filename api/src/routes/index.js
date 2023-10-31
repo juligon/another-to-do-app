@@ -1,11 +1,11 @@
 const { Router } = require("express");
 
 // Imports
-const todosRouter = require("./todos");
+const tasksRouter = require("./tasks");
 
 const router = Router();
 
 // Routers
-router.use("/todos", todosRouter);
+router.use("/tasks", tasksRouter);
 
 module.exports = router;

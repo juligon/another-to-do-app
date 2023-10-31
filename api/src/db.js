@@ -40,7 +40,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
 modelDefiners.forEach((model) => model(sequelize));
 
 // En sequelize.models están todos los modelos importados como propiedades
-const { Todo } = sequelize.models;
+const { Task } = sequelize.models;
 
 
 
