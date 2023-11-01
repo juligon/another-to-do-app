@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const taskController = require("../controllers/taskController"); 
+const taskController = require("../controllers/taskController");
 
 /**
  * @swagger
@@ -67,7 +67,7 @@ router.get("/:id", taskController.getTaskById);
  *   get:
  *     summary: Get all tasks with optional filters
  *     tags: [Task]
- *      parameters:
+ *     parameters:
  *       - name: title
  *         in: query
  *         description: Filter tasks by title (optional)
@@ -173,6 +173,5 @@ router.delete("/:id", taskController.deleteTask);
 
 // Ruta para actualizar una tarea por su ID
 router.put("/:id", taskController.updateTask);
-
 
 module.exports = router;
