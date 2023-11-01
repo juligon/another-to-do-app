@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unknown-property */
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { updateToDo, getToDos } from "../../services/todoController";
+import { getTasks, updateTask } from "../../services/taskController";
 import { BsArrowLeft } from "react-icons/bs";
 
-export default function EditToDo() {
+export default function EditTask() {
 	const { id } = useParams();
-	const todoId = parseInt(id, 10);
-	const [todos, setTodos] = useState([]);
+	const taskId = parseInt(id, 10);
+	const [tasks, setTasks] = useState([]);
 	const [formData, setFormData] = useState({
 		title: "",
 		description: "",
@@ -20,8 +20,8 @@ export default function EditToDo() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const todos = await getToDos();
-				setTodos(todos);
+				const tasks = await getTasks();
+				setTasks(tasks);
 			} catch (error) {
 				console.error("Error loading data", error);
 			}
@@ -31,20 +31,20 @@ export default function EditToDo() {
 	}, []);
 
 	useEffect(() => {
-		const todo = todos.find((todo) => todo.id === todoId);
+		const task = tasks.find((task) => task.id === taskId);
 
-		if (!todo) {
+		if (!task) {
 			console.error("Not found");
 			return;
 		}
 
 		setFormData({
-			title: todo.title || "",
-			description: todo.description || "",
-			category: todo.category || "",
-			completed: todo.completed || false,
+			title: task.title || "",
+			description: task.description || "",
+			category: task.category || "",
+			completed: task.completed || false,
 		});
-	}, [todoId, todos]);
+	}, [taskId, tasks]);
 
 	const handleInputChange = (e) => {
 		const { name, value, type, checked } = e.target;
@@ -67,7 +67,7 @@ export default function EditToDo() {
 				delete dataToSend.description;
 			}
 
-			await updateToDo(todoId, dataToSend);
+			await updateTask(taskId, dataToSend);
 			navigate("/");
 		} catch (error) {
 			console.error("Something went wrong:", error);

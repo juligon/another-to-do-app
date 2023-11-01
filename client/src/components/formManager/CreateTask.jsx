@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
-import { createToDo } from "../../services/todoController";
+import { createTask } from "../../services/taskController";
 import { useNavigate, Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 
-export default function CreateToDo() {
-	const [todoData, setTodoData] = useState({
+export default function CreateTask() {
+	const [taskData, setTaskData] = useState({
 		title: "",
 		description: "",
 		category: "",
@@ -19,27 +19,27 @@ export default function CreateToDo() {
 		if (!string) {
 			return "";
 		}
-	
+
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
-	const handleCreateTodo = async (e) => {
+	const handleCreateTask = async (e) => {
 		e.preventDefault();
-		if (!todoData.title) {
+		if (!taskData.title) {
 			return;
 		}
 
-		const capitalizedTodoData = {
-			title: capitalizeFirstLetter(todoData.title),
-			description: capitalizeFirstLetter(todoData.description),
-			category: capitalizeFirstLetter(todoData.category),
-			completed: todoData.completed,
+		const capitalizedData = {
+			title: capitalizeFirstLetter(taskData.title),
+			description: capitalizeFirstLetter(taskData.description),
+			category: capitalizeFirstLetter(taskData.category),
+			completed: taskData.completed,
 		};
 
 		try {
-			await createToDo(capitalizedTodoData);
+			await createTask(capitalizedData);
 
-			setTodoData({
+			setTaskData({
 				title: "",
 				description: "",
 				category: "",
@@ -69,7 +69,7 @@ export default function CreateToDo() {
 					<BsArrowLeft />
 				</Link>
 			</button>
-			<form onSubmit={handleCreateTodo}>
+			<form onSubmit={handleCreateTask}>
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
 						Title
@@ -78,9 +78,9 @@ export default function CreateToDo() {
 						type="text"
 						className="form-control bg-dark text-light"
 						id="title"
-						value={todoData.title}
+						value={taskData.title}
 						onChange={(e) =>
-							setTodoData({ ...todoData, title: e.target.value })
+							setTaskData({ ...taskData, title: e.target.value })
 						}
 						required
 					/>
@@ -94,9 +94,9 @@ export default function CreateToDo() {
 						className="form-control bg-dark text-light"
 						id="description"
 						rows="5"
-						value={todoData.description}
+						value={taskData.description}
 						onChange={(e) =>
-							setTodoData({ ...todoData, description: e.target.value })
+							setTaskData({ ...taskData, description: e.target.value })
 						}
 					/>
 				</div>
@@ -108,10 +108,10 @@ export default function CreateToDo() {
 						type="text"
 						className="form-select bg-dark text-light"
 						id="category"
-						value={todoData.category}
+						value={taskData.category}
 						onChange={(e) =>
-							setTodoData({
-								...todoData,
+							setTaskData({
+								...taskData,
 								category: e.target.value,
 							})
 						}
@@ -128,10 +128,10 @@ export default function CreateToDo() {
 						className="form-check-input bg-dark"
 						type="checkbox"
 						id="flexCheckDefault"
-						value={todoData.completed}
+						value={taskData.completed}
 						onChange={(e) =>
-							setTodoData({
-								...todoData,
+							setTaskData({
+								...taskData,
 								completed: e.target.checked,
 							})
 						}

@@ -2,15 +2,15 @@ import "./App.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import ToDoList from "./components/toDoList/ToDoList";
+import TasksList from "./components/tasksList/TasksList";
 import FormManager from "./components/formManager/FormManager";
 import Footer from "./components/footer/Footer";
 
 function App() {
-	const [todos, setTodos] = useState([]);
+	const [tasks, setTasks] = useState([]);
 
   const handleSearchResults = (searchResults) => {
-    setTodos(searchResults);
+    setTasks(searchResults);
   };
 
 
@@ -22,14 +22,14 @@ function App() {
 					<Route
 						exact
 						path="/"
-						element={<ToDoList todos={todos} />}
+						element={<TasksList tasks={tasks} />}
 					/>
 					<Route
-						path="/todos/create"
+						path="/tasks/create"
 						element={<FormManager isEditMode={false} />}
 					/>
 					<Route
-						path="/todos/:id"
+						path="/tasks/:id"
 						element={<FormManager isEditMode={true} />}
 					/>
 				</Routes>

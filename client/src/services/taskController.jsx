@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-catch */
-const TODOS_URL = import.meta.env.VITE_TODOS_URL;
+const TASKS_URL = import.meta.env.VITE_TASKS_URL;
 
-export async function getToDos(signal, title, category) {
-  const url = new URL(TODOS_URL);
+export async function getTasks(signal, title, category) {
+  const url = new URL(TASKS_URL);
 	
 	if (title) {
     url.searchParams.append("title", title);
@@ -26,9 +26,9 @@ export async function getToDos(signal, title, category) {
 	}
 }
 
-export async function getToDo(id) {
+export async function getTask(id) {
 	try {
-		const response = await fetch(`${TODOS_URL}/${id}`);
+		const response = await fetch(`${TASKS_URL}/${id}`);
 
 		if (!response.ok) {
 			throw new Error("Network response was not ok");
@@ -40,9 +40,9 @@ export async function getToDo(id) {
 	}
 }
 
-export async function createToDo(data) {
+export async function createTask(data) {
 	try {
-		const response = await fetch(TODOS_URL, {
+		const response = await fetch(TASKS_URL, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -60,13 +60,13 @@ export async function createToDo(data) {
 	}
 }
 
-export async function updateToDo(id, data) {
+export async function updateTask(id, data) {
 	try {
 		if (data.description === "") {
 			data.description = null;
 		}
 
-		const response = await fetch(`${TODOS_URL}/${id}`, {
+		const response = await fetch(`${TASKS_URL}/${id}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -85,9 +85,9 @@ export async function updateToDo(id, data) {
 	}
 }
 
-export async function deleteToDo(id) {
+export async function deleteTask(id) {
 	try {
-		await fetch(`${TODOS_URL}/${id}`, {
+		await fetch(`${TASKS_URL}/${id}`, {
 			method: "DELETE",
 		});
 	} catch (error) {

@@ -3,31 +3,30 @@
 /* eslint-disable no-undef */
 import { useState, useEffect } from "react";
 import {
-	getToDos,
-	deleteToDo,
-	updateToDo,
-} from "../../services/todoController";
+	getTasks,
+	updateTask,
+	deleteTask
+} from "../../services/taskController";
 import { Link } from "react-router-dom";
-import "./ToDoList.css";
+import "./TasksList.css";
 import { BsPencil, BsTrash3, BsCheckCircle } from "react-icons/bs";
 
-export default function ToDoList({ todos: initialTodos }) {
+export default function TasksList({ tasks: initialTasks }) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [todos, setTodos] = useState(initialTodos);
-
+	const [tasks, setTasks] = useState(initialTasks);
 
 	useEffect(() => {
 		const controller = new AbortController();
 		const signal = controller.signal;
 
-		const fetchToDos = async () => {
+		const fetchTasks = async () => {
 			try {
 				setLoading(true);
 				setError(null);
 
-				const response = await getToDos(signal);
-				setTodos(response);
+				const response = await getTasks(signal);
+				setTasks(response);
 			} catch (error) {
 				if (!signal.aborted) {
 					setError(error);
@@ -37,7 +36,7 @@ export default function ToDoList({ todos: initialTodos }) {
 			}
 		};
 
-		fetchToDos();
+		fetchTasks();
 
 		return () => {
 			controller.abort();
@@ -46,17 +45,17 @@ export default function ToDoList({ todos: initialTodos }) {
 
 	const handleDelete = async (id) => {
 		try {
-			await deleteToDo(id);
-			const newTodos = todos.filter((todo) => todo.id !== id);
-			setTodos(newTodos);
+			await deleteTask(id);
+			const newTasks = tasks.filter((task) => task.id !== id);
+			setTasks(newTasks);
 		} catch (error) {
 			console.error("Something went wrong", error);
 		}
 	};
 
 	useEffect(() => {
-		setTodos(initialTodos);
-	}, [initialTodos]);
+		setTasks(initialTasks);
+	}, [initialTasks]);
 
 	return (
 		<>
@@ -74,7 +73,7 @@ export default function ToDoList({ todos: initialTodos }) {
 				{error && <p>Error: {error.message}</p>}
 				{!loading &&
 					!error &&
-					todos?.map((e) => {
+					tasks?.map((e) => {
 						return (
 							<div
 								className="card text-bg-dark border-secondary mb-3"
@@ -95,11 +94,13 @@ export default function ToDoList({ todos: initialTodos }) {
 									<p className="card-text">{e.description}</p>
 
 									<div className="d-grid gap-2 d-flex justify-content-end">
-										<button type="button" className="btn btn-outline-primary"
+										<button
+											type="button"
+											className="btn btn-outline-primary"
 											style={{ border: "none", backgroundColor: "transparent" }}
 										>
 											<Link
-												to={`/todos/${e.id}`}
+												to={`/tasks/${e.id}`}
 												style={{
 													textDecoration: "none",
 												}}
@@ -109,7 +110,8 @@ export default function ToDoList({ todos: initialTodos }) {
 										</button>
 
 										<button
-											type="button" className="btn btn-outline-danger"
+											type="button"
+											className="btn btn-outline-danger"
 											onClick={() => handleDelete(e.id)}
 											style={{
 												border: "none",
