@@ -30,7 +30,7 @@ export default function NavBar({ onSearch }) {
 		>
 			<div className="container-fluid">
 				<a className="navbar-brand" href="/">
-					<img id="logo" src={Logo} alt="Logo" style={{ height: "35px" }} />
+					<img id="logo" src={Logo} alt="Logo" style={{ height: "30px" }} />
 				</a>
 				<ul className="navbar-nav me-auto">
 					<li className="nav-item">
