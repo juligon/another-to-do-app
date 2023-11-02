@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { getTasks } from "../../services/taskController";
 import { BsPlusLg } from "react-icons/bs";
+import Logo from "../../assets/Logo.png";
+import "./Navbar.css";
 
 export default function NavBar({ onSearch }) {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -28,7 +30,7 @@ export default function NavBar({ onSearch }) {
 		>
 			<div className="container-fluid">
 				<a className="navbar-brand" href="/">
-					To-Do App
+					<img id="logo" src={Logo} alt="Logo" style={{ height: "35px" }} />
 				</a>
 				<ul className="navbar-nav me-auto">
 					<li className="nav-item">
@@ -42,7 +44,7 @@ export default function NavBar({ onSearch }) {
 					</li>
 				</ul>
 				<button
-					className="navbar-toggler mb-2 mt-2"
+					className="navbar-toggler"
 					type="button"
 					data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent"
@@ -54,7 +56,7 @@ export default function NavBar({ onSearch }) {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<form
-						className="d-flex ms-auto"
+						className="d-flex ms-auto form"
 						role="search"
 						onSubmit={handleSearch}
 					>
@@ -66,7 +68,7 @@ export default function NavBar({ onSearch }) {
 							value={searchQuery}
 							onChange={handleSearchChange}
 						/>
-						<button className="btn btn-outline-secondary" type="submit">
+						<button className="btn btn-form" type="submit">
 							Search
 						</button>
 					</form>

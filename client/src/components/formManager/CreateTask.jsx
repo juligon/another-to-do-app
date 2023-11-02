@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createTask } from "../../services/taskController";
 import { useNavigate, Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
+import "./FormManager.css";
 
 export default function CreateTask() {
 	const [taskData, setTaskData] = useState({
@@ -65,7 +66,7 @@ export default function CreateTask() {
 					padding: "0 0 1.5rem",
 				}}
 			>
-				<Link to="/" style={{ textDecoration: "none", color: "#ffffff" }}>
+				<Link to="/" style={{ textDecoration: "none", color: "#fbfcff" }}>
 					<BsArrowLeft />
 				</Link>
 			</button>
@@ -140,7 +141,7 @@ export default function CreateTask() {
 						Completed
 					</label>
 				</div>
-				<button type="submit" className="btn btn-outline-primary float-end">
+				<button type="submit" className="btn btn-form float-end" style={{ color: "var(--primary-color) !Important" }}>
 					Save
 				</button>
 			</form>

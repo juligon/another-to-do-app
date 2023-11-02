@@ -4,8 +4,9 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #fbfcff !important;
   background-color: #212529;
+  --primary-color: #4fb477;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,0 +1,17 @@
+.btn-form {
+	color: var(--primary-color) !important;
+	background-color: transparent;
+	border-color: var(--primary-color) !important;
+}
+
+.btn-form:hover {
+	color: #fbfcff !important; 
+	background-color: var(--primary-color) !important;
+	border-color: var(--primary-color);
+}
+
+@media screen and (max-width: 991px) {
+	.form {
+		margin-top: 8px;
+	}
+}

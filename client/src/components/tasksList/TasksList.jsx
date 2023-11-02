@@ -2,11 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { useState, useEffect } from "react";
-import {
-	getTasks,
-	updateTask,
-	deleteTask
-} from "../../services/taskController";
+import { getTasks, deleteTask } from "../../services/taskController";
 import { Link } from "react-router-dom";
 import "./TasksList.css";
 import { BsPencil, BsTrash3, BsCheckCircle } from "react-icons/bs";
@@ -86,7 +82,13 @@ export default function TasksList({ tasks: initialTasks }) {
 											e.completed ? "completed" : "pending"
 										} text-success float-end`}
 									>
-										{e.completed ? <BsCheckCircle /> : ""}
+										{e.completed ? (
+											<BsCheckCircle
+												style={{ color: "var(--primary-color)" }}
+											/>
+										) : (
+											""
+										)}
 									</span>
 								</div>
 								<div className="card-body">
@@ -105,7 +107,7 @@ export default function TasksList({ tasks: initialTasks }) {
 													textDecoration: "none",
 												}}
 											>
-												<BsPencil />
+												<BsPencil className="icon" style={{ color: "#7699d4" }} />
 											</Link>
 										</button>
 
@@ -118,7 +120,7 @@ export default function TasksList({ tasks: initialTasks }) {
 												backgroundColor: "transparent",
 											}}
 										>
-											<BsTrash3 />
+											<BsTrash3 className="icon" style={{ color: "#ef2d56" }} />
 										</button>
 									</div>
 								</div>

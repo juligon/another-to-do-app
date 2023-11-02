@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getTasks, updateTask } from "../../services/taskController";
 import { BsArrowLeft } from "react-icons/bs";
+import "./FormManager.css";
 
 export default function EditTask() {
 	const { id } = useParams();
@@ -88,7 +89,7 @@ export default function EditTask() {
 					padding: "0 0 1.5rem",
 				}}
 			>
-				<Link to="/" style={{ textDecoration: "none", color: "#ffffff" }}>
+				<Link to="/" style={{ textDecoration: "none", color: "#fbfcff" }}>
 					<BsArrowLeft />
 				</Link>
 			</button>
@@ -151,7 +152,7 @@ export default function EditTask() {
 						Completed
 					</label>
 				</div>
-				<button type="submit" className="btn btn-outline-primary float-end">
+				<button type="submit" className="btn btn-form float-end" style={{ color: "var(--primary-color) !Important" }}>
 					Save changes
 				</button>
 			</form>
