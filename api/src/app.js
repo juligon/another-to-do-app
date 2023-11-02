@@ -21,7 +21,7 @@ const swaggerSpec = {
  		},
  		servers: [
  			{
- 				url: "https://todoappchallenge-production.up.railway.app",
+ 				url: "https://anothertodoapp-production.up.railway.app/",
  			},
  		],
  	},
