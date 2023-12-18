@@ -4,7 +4,7 @@
 This project is part of the Ensolvers Challenge and is a To-Do application that allows you to create, edit, categorize, and mark tasks as completed. Additionally, you can filter by title and category.
 
 ## Deploy
-https://to-do-app-ensolvers-challenge.vercel.app/
+https://itsanothertodoapp.vercel.app/
 
 ## Project Structure
 The project is structured as follows:
