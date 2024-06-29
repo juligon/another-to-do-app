@@ -21,7 +21,7 @@ const swaggerSpec = {
  		},
  		servers: [
  			{
- 				url: "https://anothertodoapp-production.up.railway.app/",
+ 				url: "https://another-to-do-app.onrender.com/",
  			},
  		],
  	},
