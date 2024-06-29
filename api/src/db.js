@@ -20,9 +20,9 @@ const sequelize = new Sequelize(DB_URL, {
   logging: false,
   native: false,
 	protocol: 'postgres',
-	dialectOptions: {
-		ssl: true,
-	},
+	// dialectOptions: {
+	// 	ssl: true,
+	// },
 });
 
 const basename = path.basename(__filename);
