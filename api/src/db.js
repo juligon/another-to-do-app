@@ -17,12 +17,12 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, DB_URL } = process.env;
 // );
 
 const sequelize = new Sequelize(DB_URL, {
-  logging: false,
-  native: false,
-	protocol: 'postgres',
-	// dialectOptions: {
-	// 	ssl: true,
-	// },
+	logging: false,
+	native: false,
+	protocol: "postgres",
+	dialectOptions: {
+		ssl: true,
+	},
 });
 
 const basename = path.basename(__filename);
@@ -44,8 +44,6 @@ modelDefiners.forEach((model) => model(sequelize));
 
 // En sequelize.models están todos los modelos importados como propiedades
 const { Task } = sequelize.models;
-
-
 
 module.exports = {
 	...sequelize.models,
