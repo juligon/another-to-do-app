@@ -141,7 +141,7 @@ export default function CreateTask() {
 						Completed
 					</label>
 				</div>
-				<button type="submit" className="btn btn-form float-end" style={{ color: "var(--primary-color) !Important" }}>
+				<button className="btn btn-form float-end" type="submit">
 					Save
 				</button>
 			</form>
